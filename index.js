@@ -3,12 +3,19 @@ import menuArray from '/data.js'
 const cart = []
 
 document.addEventListener('click', e => {
-    e.target.dataset.id && addItem(e.target.dataset.id)
+    e.target.dataset.add && addItem(e.target.dataset.add)
+    e.target.dataset.remove && removeItem(e.target.dataset.remove)
 })
 
 function addItem(id) {
     const itemObj = menuArray.filter(i => i.id.toString() === id)[0]
-    cart.push(itemObj)
+    !cart.includes(itemObj) && cart.push(itemObj)
+    render()
+}
+
+function removeItem(id) {
+    const idx = cart.findIndex(el => el.id.toString() === id)
+    cart.splice(idx, 1)
     render()
 }
 
@@ -26,18 +33,18 @@ function getHtml() {
                 <span class="item__ingredients">${ingredients}</span>
                 <span class="item__price">$${price}</span>
                 <button class="item__btn">
-                    <img src="./assets/add-btn.png" alt="" class="item__btn-img" data-id="${id}">
+                    <img src="./assets/add-btn.png" alt="" class="item__btn-img" data-add="${id}">
                 </button>
             </div>
             `
     })
 
     cart.forEach(item => {
-        const { name, price } = item
+        const { name, id, price } = item
         cartHtmlString += `
             <div class="order__item">
                 <span class="order__item-name">${name}</span>
-                <div class="order__remove">remove</div>
+                <div class="order__remove" data-remove="${id}">remove</div>
                 <span class="order__item-price">$${price}</span>
             </div>
             `

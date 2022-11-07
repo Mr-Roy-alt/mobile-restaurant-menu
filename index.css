@@ -86,7 +86,7 @@ body {
 }
 
 .order__item-price,
-.order__total-price {
+.order__total-amount {
     font-size: var(--fs-400);
 }
 
