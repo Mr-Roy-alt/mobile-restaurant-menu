@@ -83,6 +83,7 @@ body {
 .order__remove {
     font-size: var(--fs-200);
     color: var(--clr-secondary);
+    font-family: inherit;
 }
 
 .order__item-price,
@@ -178,6 +179,9 @@ body {
     margin-right: auto;
     margin-left: 1em;
     cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
 }
 
 .order__total,

@@ -11,12 +11,14 @@ function addItem(id) {
     const itemObj = menuArray.filter(i => i.id.toString() === id)[0]
     !cart.includes(itemObj) && cart.push(itemObj)
     render()
+    document.getElementById('order').classList.toggle('hidden')
 }
 
 function removeItem(id) {
     const idx = cart.findIndex(el => el.id.toString() === id)
     cart.splice(idx, 1)
     render()
+    cart.length !== 0 && document.getElementById('order').classList.toggle('hidden')
 }
 
 function getHtml() {
@@ -44,7 +46,7 @@ function getHtml() {
         cartHtmlString += `
             <div class="order__item">
                 <span class="order__item-name">${name}</span>
-                <div class="order__remove" data-remove="${id}">remove</div>
+                <button class="order__remove" data-remove="${id}">remove</button>
                 <span class="order__item-price">$${price}</span>
             </div>
             `
@@ -54,7 +56,7 @@ function getHtml() {
         <div class="items">
             ${itemsHtmlString}
         </div>
-        <div class="order" id="order">
+        <div class="order hidden" id="order">
             <h2 class="order__title">Your order</h2>
             <div class="order__items">
                  ${cartHtmlString}
