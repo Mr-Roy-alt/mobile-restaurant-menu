@@ -8,13 +8,10 @@ Built wit HTML, CSS and JavaScript.
 
 The goal of this project was to create an app to order from a menu.
 
-![default-preview](/assets/screenshots/default-state.jpg)
-
-![pre-checkout-state](/assets/screenshots/pre-checkout-state.jpg)
-
-![checkout-payment-modal-state](/assets/screenshots/checkout-payment-modal-state.jpg)
-
-![order-complete-state](/assets/screenshots/order-complete-state.jpg)
+<img src="./assets/screenshots/default-state.jpg" width=35%>
+<img src="./assets/screenshots/pre-checkout-state.jpg" width=35%>
+<img src="./assets/screenshots/checkout-payment-modal-state.jpg" width=35%>
+<img src="./assets/screenshots/order-complete-state.jpg" width=35%>
 
 ## Project walkthrough
 
