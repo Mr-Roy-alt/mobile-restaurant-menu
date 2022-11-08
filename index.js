@@ -47,14 +47,11 @@ function closeModal() {
     document.getElementById('modal').style.display = 'none';
 }
 
-function getHtml() {
-    let itemsHtmlString = ``
-    let cartHtmlString = ``
-    const totalOrder = cart.reduce((prev, current) => prev + current.price, 0)
-
+function getMenuHtml() {
+    let menuHtml = ``
     menuArray.forEach(item => {
         const { name, ingredients, id, price } = item
-        itemsHtmlString += `
+        menuHtml += `
             <div class="item">
                 <img src="./assets/${name.toLowerCase()}.png" alt="" class="item__img"/>
                 <span class="item__title">${name}</span>
@@ -66,10 +63,14 @@ function getHtml() {
             </div>
             `
     })
+    return menuHtml
+}
 
+function getCartHtml() {
+    let cartHtml = ``
     cart.forEach(item => {
         const { name, id, price } = item
-        cartHtmlString += `
+        cartHtml += `
             <div class="order__item">
                 <span class="order__item-name">${name}</span>
                 <button class="order__remove" data-remove="${id}">remove</button>
@@ -77,15 +78,23 @@ function getHtml() {
             </div>
             `
     })
+    return cartHtml
+}
+
+function getHtml() {
+    let menuHtml = getMenuHtml()
+    let cartHtml = getCartHtml()
+
+    const totalOrder = cart.reduce((prev, current) => prev + current.price, 0)
 
     let htmlString = `
         <div class="items">
-            ${itemsHtmlString}
+            ${menuHtml}
         </div>
         <div class="order hidden" id="order">
             <h2 class="order__title">Your order</h2>
             <div class="order__items">
-                 ${cartHtmlString}
+                 ${cartHtml}
             </div>
             <div class="order__summary">
                 <span class="order__total">Total</span>
@@ -130,10 +139,9 @@ function getHtml() {
             </form>
         </div>
         <div class="confirmation hidden" id="confirmation">
-            <span class="confirmation-msg">Thanks, ${clientName}! Your order is on its way!"</span>
+            <span class="confirmation-msg">Thanks, ${clientName}! Your order is on its way!</span>
         </div>
         `
-
     return htmlString
 }
 
