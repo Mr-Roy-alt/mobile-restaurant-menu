@@ -8,7 +8,7 @@ Built wit HTML, CSS and JavaScript.
 
 The goal of this project was to create an app to order from a restaurant menu.
 
-<img src="./assets/screenshots/order-complete-state.jpg" width=35%>
+<img src="./assets/order-complete-state.jpg" width=35%>
 
 ## Project walkthrough
 
