@@ -38,12 +38,6 @@ html {
     --fs-900: 2.5rem;
 }
 
-/* Utility Classes */
-
-.hidden {
-    display: none;
-}
-
 /* Typography */
 
 body {
@@ -94,7 +88,8 @@ body {
 }
 
 .order__item-price,
-.order__total-amount {
+.order__total-amount,
+.order__total-no-discount {
     font-size: var(--fs-400);
 }
 
@@ -113,6 +108,12 @@ body {
 .confirmation {
     font-size: var(--fs-700);
     color: var(--clr-message);
+}
+
+.review {
+    text-align: center;
+    font-size: var(--fs-700);
+    color: goldenrod;
 }
 
 /* Layout */
@@ -204,11 +205,6 @@ body {
     padding: 0;
 }
 
-.order__total,
-.order__total-amount {
-    display: block;
-}
-
 .order__summary {
     border-top: 1.5px solid #000;
     padding-top: 1em;
@@ -216,6 +212,11 @@ body {
 
 .order__total {
     margin-right: auto;
+}
+
+.order__total-no-discount {
+    text-decoration: line-through;
+    margin-right: 0.2em;
 }
 
 .order__btn {
@@ -275,4 +276,22 @@ body {
     padding: 1em;
     background-color: var(--clr-message-bg);
     width: 400px;
+}
+
+.review {
+    margin: 2em 0;
+}
+
+.review .fa-regular {
+    cursor: pointer;
+}
+
+/* Utility Classes */
+
+.hidden {
+    display: none;
+}
+
+.hidden-icons {
+    display: none !important
 }

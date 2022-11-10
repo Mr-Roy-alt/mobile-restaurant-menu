@@ -7,6 +7,7 @@ document.addEventListener('click', e => {
     e.target.dataset.add && addItem(e.target.dataset.add)
     e.target.dataset.remove && removeItem(e.target.dataset.remove)
     e.target.id === 'order__btn' && openModal()
+    e.target.dataset.icon && setReview(e.target.dataset.icon)
 })
 
 document.addEventListener('submit', e => {
@@ -22,6 +23,7 @@ document.addEventListener('submit', e => {
     document.getElementById('confirmation').classList.toggle('hidden')
     setTimeout(() => {
         document.getElementById('confirmation').classList.toggle('hidden')
+        document.getElementById('review').classList.toggle('hidden')
     }, 1500)
 })
 
@@ -30,6 +32,7 @@ function addItem(id) {
     !cart.includes(itemObj) && cart.push(itemObj)
     render()
     document.getElementById('order').classList.toggle('hidden')
+    isDiscountAvailable() && document.getElementById('order__total-no-discount').classList.toggle('hidden')
 }
 
 function removeItem(id) {
@@ -45,6 +48,62 @@ function openModal() {
 
 function closeModal() {
     document.getElementById('modal').style.display = 'none';
+}
+
+function setReview(icon) {
+    switch (icon) {
+        case 'regular-1':
+            document.getElementById('solid-1').classList.toggle('hidden-icons')
+            document.getElementById('regular-1').classList.toggle('hidden-icons')
+            break
+        case 'regular-2':
+            document.getElementById('solid-1').classList.toggle('hidden-icons')
+            document.getElementById('solid-2').classList.toggle('hidden-icons')
+            document.getElementById('regular-1').classList.toggle('hidden-icons')
+            document.getElementById('regular-2').classList.toggle('hidden-icons')
+            break
+        case 'regular-3':
+            document.getElementById('solid-1').classList.toggle('hidden-icons')
+            document.getElementById('solid-2').classList.toggle('hidden-icons')
+            document.getElementById('solid-3').classList.toggle('hidden-icons')
+            document.getElementById('regular-1').classList.toggle('hidden-icons')
+            document.getElementById('regular-2').classList.toggle('hidden-icons')
+            document.getElementById('regular-3').classList.toggle('hidden-icons')
+            break
+        case 'regular-4':
+            document.getElementById('solid-1').classList.toggle('hidden-icons')
+            document.getElementById('solid-2').classList.toggle('hidden-icons')
+            document.getElementById('solid-3').classList.toggle('hidden-icons')
+            document.getElementById('solid-4').classList.toggle('hidden-icons')
+            document.getElementById('regular-1').classList.toggle('hidden-icons')
+            document.getElementById('regular-2').classList.toggle('hidden-icons')
+            document.getElementById('regular-3').classList.toggle('hidden-icons')
+            document.getElementById('regular-4').classList.toggle('hidden-icons')
+            break
+        case 'regular-5':
+            document.getElementById('solid-1').classList.toggle('hidden-icons')
+            document.getElementById('solid-2').classList.toggle('hidden-icons')
+            document.getElementById('solid-3').classList.toggle('hidden-icons')
+            document.getElementById('solid-4').classList.toggle('hidden-icons')
+            document.getElementById('solid-5').classList.toggle('hidden-icons')
+            document.getElementById('regular-1').classList.toggle('hidden-icons')
+            document.getElementById('regular-2').classList.toggle('hidden-icons')
+            document.getElementById('regular-3').classList.toggle('hidden-icons')
+            document.getElementById('regular-4').classList.toggle('hidden-icons')
+            document.getElementById('regular-5').classList.toggle('hidden-icons')
+            break
+    }
+    setTimeout(() => {
+        document.getElementById('review').classList.toggle('hidden')
+    }, 1500)
+}
+
+function isDiscountAvailable() {
+    const isBeerIncluded = cart.filter(i => i.id === 2).length === 1 ? true : false
+    if (isBeerIncluded && cart.length > 1) {
+        return true
+    }
+    return false
 }
 
 function getMenuHtml() {
@@ -85,7 +144,8 @@ function getHtml() {
     let menuHtml = getMenuHtml()
     let cartHtml = getCartHtml()
 
-    const totalOrder = cart.reduce((prev, current) => prev + current.price, 0)
+    const initialTotal = cart.reduce((prev, current) => prev + current.price, 0)
+    let finalTotal = isDiscountAvailable() ? (initialTotal * 0.85).toFixed(1) : initialTotal
 
     let htmlString = `
         <div class="items">
@@ -98,7 +158,8 @@ function getHtml() {
             </div>
             <div class="order__summary">
                 <span class="order__total">Total</span>
-                <span class="order__total-amount">$${totalOrder}</span>
+                <span class="order__total-no-discount hidden" id="order__total-no-discount">$${initialTotal}</span>
+                <span class="order__total-amount">$${finalTotal}</span>
             </div>
             <button class="order__btn" id="order__btn">Complete order</button>
         </div> 
@@ -141,6 +202,18 @@ function getHtml() {
         <div class="confirmation hidden" id="confirmation">
             <span class="confirmation-msg">Thanks, ${clientName}! Your order is on its way!</span>
         </div>
+        <div class="review hidden" id="review">
+            <i class="fa-solid fa-star hidden-icons" id="solid-1"></i>
+            <i class="fa-solid fa-star hidden-icons" id="solid-2"></i>
+            <i class="fa-solid fa-star hidden-icons" id="solid-3"></i>
+            <i class="fa-solid fa-star hidden-icons" id="solid-4"></i>
+            <i class="fa-solid fa-star hidden-icons" id="solid-5"></i>
+            <i class="fa-regular fa-star" id="regular-1" data-icon="regular-1"></i>
+            <i class="fa-regular fa-star" id="regular-2" data-icon="regular-2"></i>
+            <i class="fa-regular fa-star" id="regular-3" data-icon="regular-3"></i>
+            <i class="fa-regular fa-star" id="regular-4" data-icon="regular-4"></i>
+            <i class="fa-regular fa-star" id="regular-5" data-icon="regular-5"></i>
+        </div> 
         `
     return htmlString
 }
