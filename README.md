@@ -1,12 +1,8 @@
 # Mobile Restaurant Menu
 
-Solo project from [Scrimba](https://scrimba.com/). 
-
-Built wit HTML, CSS and JavaScript.
+[Scrimba](https://scrimba.com/)'s solo project. The goal of this project was to create an app to order from a restaurant menu.
 
 ## Preview
-
-The goal of this project was to create an app to order from a restaurant menu.
 
 <img src="./assets/order-complete-state.jpg" width=35%>
 
