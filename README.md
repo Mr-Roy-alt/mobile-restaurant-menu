@@ -4,7 +4,7 @@
 
 ## Preview
 
-<img src="./assets/order-complete-state.jpg" width=35%>
+![preview](./assets/order-complete-state.jpg)
 
 ## Project walkthrough
 
